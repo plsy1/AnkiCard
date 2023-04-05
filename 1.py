@@ -97,8 +97,16 @@ def update_note_fields(card_id, expression):
 if __name__ == '__main__':
     query = "deck:読みちゃん"
     note_ids = find_notes(query)
-    print(note_ids)
-    cardNumber = 202 #从这个位置开始更替，填词卡数量
+    # print(note_ids)
+
+    cardNumber = None
+
+    with open("len.txt",'r') as f:
+        content = f.read() 
+        cardNumber = int(content)
+        
+    print("将从 " + str(cardNumber) + " 处开始添加。\n")
+
     for id in note_ids[cardNumber:]:
         field_value = get_field_value(id)
         print(field_value)
@@ -106,3 +114,7 @@ if __name__ == '__main__':
         print(expression)
         update_note_fields(id, expression)
         time.sleep(2)
+    
+    cardNumber = len(note_ids)
+    with open("len.txt",'w') as f:
+        f.write(str(cardNumber))
