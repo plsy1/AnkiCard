@@ -98,7 +98,8 @@ if __name__ == '__main__':
     query = "deck:読みちゃん"
     note_ids = find_notes(query)
     print(note_ids)
-    for id in note_ids:
+    cardNumber = 202 #从这个位置开始更替，填词卡数量
+    for id in note_ids[cardNumber:]:
         field_value = get_field_value(id)
         print(field_value)
         expression = query_expression(field_value)
